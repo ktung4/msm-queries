@@ -3,6 +3,21 @@ class DirectorsController < ApplicationController
     render({:template => "director_templates/list"})
   end
 
+  def junior
+    
+    @the_youngest_director = Director.where.not({:dob=>nil}).order(dob: :desc).first
+
+
+    render({:template => "director_templates/youngestdirector"})
+  end
+
+  def elder
+    
+    @the_eldest_director = Director.where.not({:dob=>nil}).order(dob: :desc).last
+
+    render({:template => "director_templates/eldestdirector"})
+  end
+
   def show
     the_id = params.fetch("the_id")
 
